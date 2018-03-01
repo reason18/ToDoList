@@ -1,42 +1,76 @@
-body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+div {
+  margin: 0;
+  padding: 0;
 }
 
 .max-height {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
-.App {
-    text-align: center;
+.sidebar {
+  background-color: #2b2f3e;
+}
+.main-content {
+    background-color: #f9f9f9;
+}
+.items-block,
+.comment-block {
+    box-shadow: 0px 0px 10px 0px darkgray;
 }
 
-.App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 80px;
+.turquoise-bg {
+    background-color: #27ccc1;
 }
 
-.App-header {
-    background-color: #222;
-    height: 150px;
-    padding: 20px;
-    color: white;
+.turquoise-border {
+    border-color: #27ccc1;
+}
+.list-group-item {
+    border: none;
+    border-radius: 0!important;
 }
 
-.App-title {
-    font-size: 1.5em;
+.items-content .list-group-item.active {
+    border-left: 3px solid #ff2f5a;
+    background: white;
+    color: #212529;
+}
+.avatar-block {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background: cornflowerblue;
+}
+.text-block textarea {
+    border-radius: 0;
+    min-height: 90px;
 }
 
-.App-intro {
-    font-size: large;
+.custom-list-item {
+    border-bottom: 1px solid #f2f2f2;
 }
+.custom-list-item button {
+    width: 90px;
+    border: 1px solid #ff2f5a;
+    color: #ff2f5a;
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+}
+.custom-list-item button:hover {
+    background-color: #ff2f5a!important;
+    color: white!important;
+}
+/* f2f2f2 */
+
+h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1.2;
 }
