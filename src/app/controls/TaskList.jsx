@@ -9,71 +9,39 @@ import {
   ListGroupItem
 } from "reactstrap";
 
-const data = [
-  {
-    id: 1,
-    title: "Dapibus ac facilisis in",
-    comments: [
-      {
-        id: 1,
-        text: `lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum
-        lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-        ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem
-        ipsumlorem ipsum`,
-        avatar: "smth"
-      },
-      {
-        id: 2,
-        text: `lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum
-        lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-        ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem
-        ipsumlorem ipsum`,
-        avatar: "smth"
-      }
-    ]
-  },
-  {
-    id: 2,
-    title: "Dapibus ac facilisis in",
-    comments: [
-      {
-        id: 3,
-        text: `lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum
-        lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-        ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem
-        ipsumlorem ipsum`,
-        avatar: "smth"
-      },
-      {
-        id: 4,
-        text: `lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum
-        lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-        ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem
-        ipsumlorem ipsum`,
-        avatar: "smth"
-      }
-    ]
-  }
-];
-
 export class TaskList extends React.Component {
   render() {
-    const activeId = 1;
+    const { data, selectedTask, inputData } = this.props.state;
+    const { comments } = this.props;
+
+    const activeId = selectedTask.id;
     const listItems = data.map(item => {
+      const commentsCount = comments.filter(
+        comment => comment.taskId === item.id
+      ).length;
       const isActive = activeId === item.id ? "active" : "";
       return (
-        <ListGroupItem className={`py-0 m-0 ${isActive}`}>
+        <ListGroupItem className={`py-0 m-0 ${isActive}`} key={item.id}>
           <Col
             xs={12}
             className="custom-list-item px-0 py-2 d-flex justify-content-between align-items-center"
           >
-            <Col xs={8} className="px-0">
+            <Col
+              xs={8}
+              className="px-0"
+              onClick={this.onSelect.bind(this, item.id)}
+            >
               {item.title}{" "}
               <Badge pill className="turquoise-bg text-white">
-                {item.comments.length}
+                {commentsCount}
               </Badge>
             </Col>
-            <Button className="bg-white">Delete</Button>
+            <Button
+              className="bg-white"
+              onClick={this.onDelete.bind(this, item.id)}
+            >
+              Delete
+            </Button>
           </Col>
         </ListGroupItem>
       );
@@ -84,9 +52,23 @@ export class TaskList extends React.Component {
           <h2> Items </h2>
         </Col>
         <Col xs={12} className="items-input">
-          <Form inline className="d-flex justify-content-between">
-            <Input className="col-9 mr-2" placeholder="Type name here..." />
-            <Button className="col turquoise-bg turquoise-border">
+          <Form
+            inline
+            className="d-flex justify-content-between"
+            onSubmit={this.onSubmit.bind(this)}
+          >
+            <Input
+              className="col-9 mr-2"
+              placeholder="Type name here..."
+              onChange={this.onChange.bind(this)}
+              value={this.props.state.inputData}
+              require="true"
+            />
+            <Button
+              className="col turquoise-bg turquoise-border"
+              onClick={this.onSubmit.bind(this)}
+              disabled={this.props.state.inputData.length < 1}
+            >
               Add new
             </Button>
           </Form>
@@ -96,5 +78,23 @@ export class TaskList extends React.Component {
         </Col>
       </Col>
     );
+  }
+  onChange(e) {
+    this.props.onInputChange(e.target.value);
+  }
+  onSubmit(e) {
+    e.preventDefault();
+    const newItem = {
+      title: this.props.state.inputData,
+      id: Math.ceil(Math.random() * 1000),
+      comments: 0
+    };
+    this.props.onInputSubmit(newItem);
+  }
+  onDelete(id, e) {
+    this.props.onDelete(id);
+  }
+  onSelect(id, e) {
+    this.props.onSelect(id);
   }
 }
