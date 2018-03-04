@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Col, Row, Input, ListGroup, ListGroupItem } from "reactstrap";
+import { Button, Col, Row, Input, ListGroup, ListGroupItem } from "reactstrap";
 
 export class CommentsList extends React.Component {
   componentDidMount() {
@@ -21,7 +21,7 @@ export class CommentsList extends React.Component {
             <Col xs={2} className="pt-1">
               <span className="avatar-block" />
             </Col>
-            <Col xs={10} className="text-block">
+            <Col xs={10} className="text-block pl-3 pl-md-0">
               {item.text}
             </Col>
           </Row>
@@ -40,7 +40,7 @@ export class CommentsList extends React.Component {
           <Col xs={2} className="pt-1">
             <span className="avatar-block bg-success" />
           </Col>
-          <Col xs={10} className="text-block">
+          <Col xs={10} className="text-block pl-3 pl-md-0">
             <Input
               type="textarea"
               name="text"
@@ -50,6 +50,13 @@ export class CommentsList extends React.Component {
               require="true"
             />
           </Col>
+          <Button
+            className="col text-white mt-2 mt-md-0 turquoise-bg turquoise-border d-block d-md-none"
+            onClick={this.onSubmit.bind(this)}
+            disabled={this.props.state.inputData.length < 1}
+          >
+            Add new
+          </Button>
         </Row>
       </Col>
     );
@@ -59,13 +66,15 @@ export class CommentsList extends React.Component {
   }
   keydownHandler(e) {
     if (e.keyCode === 13 && e.ctrlKey) {
-      console.log(this.props, "sssss");
-      const item = {
-        id: Math.ceil(Math.random() * 1000),
-        text: this.props.state.inputData,
-        taskId: this.props.selectedTask.id
-      };
-      this.props.onInputSubmit(item);
+      this.onSubmit();
     }
+  }
+  onSubmit(e) {
+    const item = {
+      id: Math.ceil(Math.random() * 1000),
+      text: this.props.state.inputData,
+      taskId: this.props.selectedTask.id
+    };
+    this.props.onInputSubmit(item);
   }
 }

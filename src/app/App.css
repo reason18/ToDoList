@@ -73,7 +73,7 @@ h2 {
   border: 1px solid #ff2f5a;
   color: #ff2f5a;
 }
-.custom-list-item button:hover {
+.custom-list-item .delete-button:hover {
   background-color: #ff2f5a !important;
   color: white !important;
 }

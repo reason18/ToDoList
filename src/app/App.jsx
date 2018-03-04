@@ -20,8 +20,8 @@ class App extends React.Component {
       <div className="App">
         <Row noGutters>
           <Sidebar />
-          <Col xs={10} className="main-content max-height d-flex px-3 py-4">
-            <Col xs={6}>
+          <Col xs={12} md={10} className="main-content max-height d-flex flex-wrap px-0 px-md-3 py-4">
+            <Col xs={12} md={6}>
               <TaskList
                 state={this.props.tasks}
                 comments={this.props.comments.data}
@@ -31,7 +31,7 @@ class App extends React.Component {
                 onSelect={this.props.onSelectTask}
               />
             </Col>
-            <Col xs={6}>
+            <Col xs={12} md={6}>
               {this.props.tasks.selectedTask.id ? (
                 <CommentsList
                   state={this.props.comments}

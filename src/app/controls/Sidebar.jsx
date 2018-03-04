@@ -4,7 +4,7 @@ import { Col } from "reactstrap";
 export class Sidebar extends React.Component {
   render() {
     return (
-      <Col xs={2} className="sidebar max-height">
+      <Col xs={12} md={2} className="sidebar">
         <Col className="pt-3 pb-2">
           <h2 className="text-uppercase text-white">Dairy app</h2>
         </Col>

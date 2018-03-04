@@ -11,7 +11,7 @@ import {
 
 export class TaskList extends React.Component {
   render() {
-    const { data, selectedTask, inputData } = this.props.state;
+    const { data, selectedTask } = this.props.state;
     const { comments } = this.props;
 
     const activeId = selectedTask.id;
@@ -37,7 +37,7 @@ export class TaskList extends React.Component {
               </Badge>
             </Col>
             <Button
-              className="bg-white"
+              className="bg-white delete-button"
               onClick={this.onDelete.bind(this, item.id)}
             >
               Delete
@@ -58,7 +58,7 @@ export class TaskList extends React.Component {
             onSubmit={this.onSubmit.bind(this)}
           >
             <Input
-              className="col-9 mr-2"
+              className="col-12 col-md-9 mr-md-2 mb-2 mb-md-0"
               placeholder="Type name here..."
               onChange={this.onChange.bind(this)}
               value={this.props.state.inputData}
